@@ -32,6 +32,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   data_connection_checker_nulls: ^0.0.2
   date_time_picker: ^2.1.0
+  dotted_border: ^2.1.0
   excel: ^4.0.2
   figma_squircle: ^0.5.3
   firebase_auth: ^4.16.0
@@ -41,6 +42,7 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_easyloading: ^3.0.5
+  flutter_inappwebview: ^6.1.5
   flutter_page_transition_plus: ^1.0.2
   flutter_riverpod: ^2.6.1
   flutter_slimy_card: ^1.0.2
@@ -50,37 +52,23 @@ dependencies:
   font_awesome_flutter: ^10.8.0
   gif: ^2.3.0
   glassmorphism: ^3.0.0
-  
   google_fonts: ^6.2.1
   image_picker: ^1.0.7
   intl: ^0.17.0
   liquid_progress_indicator_v2: ^0.5.0
-  # flutter_page_transition: ^0.1.0
-  #liquid_progress_indicator:
-  # data_connection_checker: ^0.3.4
-  #firebase_messaging: ^11.2.4
-  #flutter_local_notifications: ^9.1.5
-  uuid: ^4.3.3
   liquid_swipe: ^3.1.0
   loading_indicator: ^3.1.1
-  url_launcher: ^6.2.3
-
-
-
-  path_provider: ^2.1.2
-  youtube_player_flutter: ^8.1.2
-
-
+  lottie: ^3.2.0
   multi_dropdown: ^2.1.3
   page_transition: ^2.1.0
+  path_provider: ^2.1.2
   syncfusion_flutter_calendar: ^21.2.3
   table_calendar: ^3.0.8
-
-
-  dotted_border: ^2.1.0
   toastification: ^2.3.0
-  lottie: ^3.2.0
   transparent_image: ^2.0.1
+  url_launcher: ^6.2.3
+  uuid: ^4.3.3
+  youtube_player_flutter: ^9.1.1
 
 dev_dependencies:
   flutter_test:
@@ -106,7 +94,6 @@ flutter:
     - assets/gifs/
     - assets/lottie/
     - assets/lottie/tick.json
-
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
   # For details regarding adding assets from package dependencies, see

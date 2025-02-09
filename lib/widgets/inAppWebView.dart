@@ -1,6 +1,5 @@
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 
-
 class MyInAppBrowser extends InAppBrowser {
   @override
   Future onBrowserCreated() async {
@@ -40,5 +39,5 @@ Future<void> inAppBrowser(String url) {
       inAppWebViewGroupOptions: InAppWebViewGroupOptions(
           crossPlatform: InAppWebViewOptions(javaScriptEnabled: true)));
   return browser.openUrlRequest(
-      urlRequest: URLRequest(url: Uri.parse(url.trim())), options: options);
+      urlRequest: URLRequest(url: WebUri(url.trim())), options: options);
 }
