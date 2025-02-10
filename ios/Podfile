@@ -1,5 +1,5 @@
 # Uncomment this line to define a global platform for your project
-platform :ios, '12.0'
+platform :ios, '15.6'
 
 # CocoaPods analytics sends network stats synchronously affecting flutter build latency.
 ENV['COCOAPODS_DISABLE_STATS'] = 'true'
@@ -35,46 +35,14 @@ target 'Runner' do
 end
 
 post_install do |installer|
-  # Process all pod targets first.
-  installer.pods_project.targets.each do |target|
-    flutter_additional_ios_build_settings(target)
-    target.build_configurations.each do |config|
-      # Force deployment target
-      config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '12.0'
-      
-      # For the specific BoringSSL-GRPC target, remove any -G flag more aggressively.
-      if target.name.include?("BoringSSL-GRPC")
-        if config.build_settings['OTHER_LDFLAGS']
-          if config.build_settings['OTHER_LDFLAGS'].is_a?(Array)
-            config.build_settings['OTHER_LDFLAGS'].reject! { |flag| flag.include?("-G") }
-          elsif config.build_settings['OTHER_LDFLAGS'].is_a?(String)
-            config.build_settings['OTHER_LDFLAGS'] = config.build_settings['OTHER_LDFLAGS'].gsub(/-G\S*/, '')
-          end
-        end
-      end
-
-      # For all targets, scrub the common keys.
-      ['OTHER_LDFLAGS', 'OTHER_CFLAGS', 'OTHER_SWIFT_FLAGS'].each do |flag|
-        if config.build_settings[flag]
-          if config.build_settings[flag].is_a?(Array)
-            config.build_settings[flag].reject! { |f| f.include?("-G") }
-          elsif config.build_settings[flag].is_a?(String)
-            config.build_settings[flag] = config.build_settings[flag].gsub(/-G\S*/, '')
-          end
-        end
-      end
-    end
-  end
-
-  # Now process aggregate targets (like the Runner project)
-  installer.aggregate_targets.each do |target|
-    target.user_project.build_configurations.each do |config|
-      ['OTHER_LDFLAGS', 'OTHER_CFLAGS', 'OTHER_SWIFT_FLAGS'].each do |flag|
-        if config.build_settings[flag]
-          if config.build_settings[flag].is_a?(Array)
-            config.build_settings[flag].reject! { |f| f.include?("-G") }
-          elsif config.build_settings[flag].is_a?(String)
-            config.build_settings[flag] = config.build_settings[flag].gsub(/-G\S*/, '')
+  post_install do |installer|
+    installer.pods_project.targets.each do |target|
+      if target.name == 'BoringSSL-GRPC'
+        target.source_build_phase.files.each do |file|
+          if file.settings && file.settings['COMPILER_FLAGS']
+            flags = file.settings['COMPILER_FLAGS'].split
+            flags.reject! { |flag| flag == '-GCC_WARN_INHIBIT_ALL_WARNINGS' }
+            file.settings['COMPILER_FLAGS'] = flags.join(' ')
           end
         end
       end
